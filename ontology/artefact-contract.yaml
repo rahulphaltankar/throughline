@@ -1,0 +1,69 @@
+# Canonical Throughline artefact output contract.
+#
+# This file is the SINGLE machine-readable source of truth for artefact
+# frontmatter. scripts/gates/validate_artifact.py reads it directly.
+# docs/artefact-contract.md and the Skill reference copy restate it for humans
+# and are kept in sync by tests/test_contract.py.
+#
+# It contains no LLM behaviour and no workflow ordering. Ordering is derived
+# from ontology/artefacts/core.yaml by the kernel.
+
+schema_version: 1
+
+# Frontmatter keys that must be present on every artefact.
+required_fields:
+  - id
+  - type
+  - schema_version
+  - produced_by
+  - inputs
+  - status
+  - evidence
+  - assumptions
+  - open_questions
+  - review_required
+
+# Frontmatter keys that may be present.
+optional_fields:
+  - unsatisfied_inputs
+  - notes
+
+# Allowed lifecycle states.
+statuses:
+  - draft
+  - proposed
+  - accepted
+  - stale
+  - rejected
+
+# Allowed evidence classes. Principle 3 of README.md.
+evidence_classes:
+  - observed
+  - cited
+  - derived
+  - assumed
+
+confidence_levels:
+  - low
+  - medium
+  - high
+
+# A pseudo-type permitted in `inputs` to reference the originating intake
+# record rather than an upstream artefact. It never satisfies a `requires`
+# entry in the artefact registry.
+intake_input_type: intake
+
+item_fields:
+  # inputs: [{id, type}]
+  inputs: [id, type]
+  # evidence: [{claim, class, source, confidence}]
+  evidence: [claim, class, source, confidence]
+  # assumptions: [{id, statement, validation}]
+  assumptions: [id, statement, validation]
+  # open_questions: [{id, question, owner}]
+  open_questions: [id, question, owner]
+  # unsatisfied_inputs: [{type, reason}] — an EXPLICIT, machine-visible
+  # declaration that a registry-required upstream artefact was not produced.
+  # The gate requires inputs + unsatisfied_inputs to cover `requires` exactly,
+  # so a dependency can be deferred but never silently dropped.
+  unsatisfied_inputs: [type, reason]

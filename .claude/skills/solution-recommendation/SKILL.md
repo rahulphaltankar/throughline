@@ -1,5 +1,5 @@
 ---
-name: produce-solution-recommendation
+name: solution-recommendation
 description: Produce a decision-ready end-to-end solution recommendation from validated upstream artefacts, including architecture, data flows, technology choices, delivery plan, PMO estimate, deployment, operations, risks, and decision points. Use when an executive or delivery team needs a coherent first-pass solution blueprint without implementing it.
 ---
 # Produce Solution Recommendation
@@ -42,3 +42,35 @@ Provide ranges, not false precision. Separate one-time implementation cost from 
 
 ## Evidence rule
 Every material external fact must be cited. Every internal/OEM-specific inference must be marked as assumption or requires validation.
+
+## Output contract
+Conform to the canonical artefact contract. Do not invent a frontmatter variant.
+
+- Machine-readable: `ontology/artefact-contract.yaml`
+- Explained: `docs/artefact-contract.md`
+- Packaged copy: `.claude/skills/solution-blueprint/reference/artefact-output-contract.md`
+
+Set `type: solution-recommendation` and `produced_by: skill:solution-recommendation`.
+
+## Gate readiness
+Every `evidence` entry needs a class, source and confidence. Every assumption
+needs a validation method. Every open question needs an owner. This artefact is
+`human_required`, so it must set `review_required: true`.
+
+The registry requires these headings verbatim: `## Executive recommendation`,
+`## Recommended solution`, `## Architecture`, `## Delivery plan`, `## Budget`,
+`## Operating model`, `## Human decisions required`.
+
+This artefact also requires `kpi-model` upstream. **No Skill currently produces
+it.** Until one does, declare it in `unsatisfied_inputs` with a reason. A
+recommendation with no agreed baseline or target measure cannot be judged, and
+saying so is part of the artefact.
+
+## Scope honesty
+This Skill produces one artefact in a much larger plan. Run
+`python -m throughline.cli plan <intake>` to see the full artefact set the
+problem actually requires. Do not describe this artefact, or the six-step chain
+it belongs to, as a complete solution blueprint.
+
+The gate checks structure only. Passing it does not make the recommendation
+correct, evidenced, approved, or production-ready.

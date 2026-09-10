@@ -1,9 +1,33 @@
 ---
 id: PP20-A05
 type: solution-options
+schema_version: 1
+produced_by: skill:solution-options
+inputs:
+- id: PP20-A02
+  type: evidence-brief
+- id: PP20-A04
+  type: requirements
 status: proposed
-evidence_classes: derived, assumed
-inputs: [PP20-A02, PP20-A04]
+evidence:
+- claim: All three options are evaluated against the requirements catalogue rather than against vendor
+    capability.
+  class: derived
+  source: PP20-A04
+  confidence: medium
+- claim: The comparison-matrix ratings are judgement, not benchmark results.
+  class: assumed
+  source: No benchmark or proof-of-concept data has been supplied.
+  confidence: low
+assumptions:
+- id: A8
+  statement: The pilot use case requires both operational integration and analytical/data-product access.
+  validation: Confirm the pilot use case. If it is analytics-only, Option A may be sufficient.
+open_questions:
+- id: Q14
+  question: Does the pilot use case genuinely require deep relationship traversal?
+  owner: Data Architect
+review_required: false
 ---
 # Solution Options — PP20
 

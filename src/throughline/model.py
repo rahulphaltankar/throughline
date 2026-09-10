@@ -14,6 +14,21 @@ class ArtifactSpec:
     optional: bool = False
     human_required: bool = False
     evidence_required: bool = False
+    produced_by: str | None = None
+    required_sections: tuple[str, ...] = ()
+
+    @property
+    def skill(self) -> str | None:
+        """Skill directory name bound to this artefact, or None if unbound."""
+        if not self.produced_by:
+            return None
+        prefix = "skill:"
+        if not self.produced_by.startswith(prefix):
+            raise ValueError(
+                f"Artefact {self.id} has malformed produced_by {self.produced_by!r}; "
+                f"expected '{prefix}<skill-directory>'"
+            )
+        return self.produced_by[len(prefix):]
 
 
 @dataclass
@@ -38,8 +53,14 @@ class Intake:
 class Blueprint:
     intake: Intake
     archetypes: list[str]
+    seeded_artifacts: list[str]
     artifacts: list[str]
+    closure_added: list[str]
     frontier: list[str]
+    generatable: list[str]
+    ungeneratable: list[str]
+    mvp_sequence: list[str]
+    mvp_unsatisfied: dict[str, list[str]]
     human_decisions: list[str]
     assumptions_to_validate: list[str]
     notes: list[str]

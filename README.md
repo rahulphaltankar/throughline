@@ -1,73 +1,53 @@
 # Throughline
 
-**A governed intent-to-solution blueprint compiler.**
+**A deterministic artefact planner for solutioning work.**
 
-Throughline takes a messy problem statement, pain point, opportunity, or hypothesis and compiles it into a traceable solution blueprint: problem framing, requirements, options, architecture, data, AI, security/privacy/regulatory considerations, commercial case, delivery plan, project-management artefacts, deployment, operations, change, and evidence.
+Throughline takes a problem statement, pain point, opportunity or hypothesis and
+works out **which solutioning artefacts are required, in what dependency order,
+which of them can currently be produced, and which human decisions are
+unavoidable**.
 
-This repository is the **blueprint-first** implementation. It does not deploy or operate customer systems. It deliberately separates:
+It plans the work. It does not do the work.
 
-- **Intent** — what the requester says they need.
-- **Artefacts** — typed outputs produced by solutioning work.
-- **Dependencies** — what must exist before an artefact can be produced.
-- **Gates** — what must be true before an artefact is accepted.
-- **Skills** — procedural know-how used by an AI worker to produce one artefact.
-- **Agents** — bounded execution roles.
-- **Kernel** — deterministic orchestration and state logic.
-- **Human decisions** — decisions that cannot safely be delegated.
+> **Read this before evaluating the repo.** Throughline does not generate
+> solution content, does not call an LLM, does not estimate cost or effort, and
+> does not execute anything. Six artefact types have a Claude Skill that tells a
+> model how to write them; the other 52 have no producer at all. See
+> [What exists today](#what-exists-today).
 
-The 15 lifecycle phases from the design work remain a **reporting view**, not the machine control structure.
+## What exists today
 
-## Design principles
+| Layer | State |
+|---|---|
+| Artefact registry — 58 typed artefacts with dependency edges | **Implemented** |
+| Archetype routing — 11 keyword-matched solution classes | **Implemented** |
+| Transitive dependency closure | **Implemented** |
+| Topological ordering + dependency-ready frontier | **Implemented** |
+| Skill bindings (`produced_by`) for 7 of 58 artefact types | **Implemented** |
+| Canonical artefact output contract | **Implemented** |
+| Tier-0 deterministic gate (structure only) | **Implemented** |
+| Claude Skills — procedural instructions for 6 artefact types | **Implemented (prose)** |
+| Artefact *generation* | **Not implemented** |
+| Gate tiers 1–4 (structural predicates, adversarial, rubric, human) | **Not implemented** |
+| PMO calculation (WBS, estimation, schedule, budget) | **Not implemented** |
+| Ledger, versioning, staleness propagation, approval objects | **Not implemented** |
+| Any execution or deployment capability | **Not implemented, and out of scope** |
 
-1. **The graph routes work; the model does not invent workflow order.**
-2. **Artefacts are typed and provenance-aware.**
-3. **Every important claim is `observed`, `cited`, `derived`, or `assumed`.**
-4. **Acceptance criteria are frozen before downstream solutioning.**
-5. **Deterministic gates outrank LLM judgement.**
-6. **The author never grades its own work.**
-7. **Human approvals are explicit, typed, hash-bound, and non-waivable where required.**
-8. **No execution capability is implied by a blueprint.**
-9. **Unknowns become research questions or expiring assumptions—not invented facts.**
-10. **Project-management outputs are first-class solution artefacts.**
+The kernel emits an **artefact plan**: which artefacts, in what order, produced
+by what, and what is still unproducible. It does not emit problem framing,
+requirements, architecture, estimates or budgets. Nothing in this repository
+writes an artefact.
 
-## Claude Skill
+### What "Skill binding" does and does not mean
 
-The repo contains a project Skill at:
+Seven artefact types resolve to a `SKILL.md` — a set of written instructions for
+a model. There is **no runner**. Nothing in `src/` or `scripts/` invokes a model,
+passes it upstream artefacts, or writes an output file. A human or an agent must
+read the Skill and do the work.
 
-```text
-.claude/skills/solution-blueprint/SKILL.md
-```
-
-Claude Code can discover project Skills from that exact structure. The Skill instructs Claude to use Throughline as the planning/blueprinting method and to generate a complete first-pass solution blueprint without executing production changes.
-
-## Quick start
-
-```bash
-python -m throughline.cli plan projects/pp20/problem.yaml --out projects/pp20/blueprint
-```
-
-The command produces:
-
-```text
-blueprint/plan.json
-blueprint/plan.md
-```
-
-## What the MVP does
-
-The deterministic kernel currently:
-
-- loads an intake record;
-- classifies likely solution archetypes using explicit rules;
-- composes required artefacts from those archetypes;
-- resolves the dependency graph;
-- calculates a deterministic execution frontier;
-- emits a first-pass blueprint structure;
-- identifies human decision points;
-- records evidence requirements and open questions;
-- generates PMO artefacts such as WBS, estimation inputs, resource-plan inputs, schedule inputs and budget inputs.
-
-It intentionally does **not** pretend that it can objectively validate soft questions such as market desirability, organisational willingness, or legal attestation.
+The artefacts under `tests/fixtures/pp20/` are **hand-written test data** used to
+exercise the gate. They are not system output and must never be presented as
+such.
 
 ## Architecture
 
@@ -75,45 +55,112 @@ It intentionally does **not** pretend that it can objectively validate soft ques
 Problem / Opportunity
         |
         v
-   Intake Contract
+   Intake Contract              (schemas/intake.schema.json - not yet enforced)
         |
         v
- Archetype Classifier  <--- explicit rules, model may assist later
+ Archetype Classifier           deterministic keyword rules
         |
         v
- Artefact Manifest
+ Seed Artefact Manifest         ontology/archetypes/*.yaml
         |
         v
- Dependency Graph
+ Transitive Closure             ontology/artefacts/core.yaml owns every edge
         |
-        +-------------------+
-        |                   |
-        v                   v
-   Skills / Workers       Gates
-        |                   |
-        +---------+---------+
-                  v
-          Accepted Artefacts
-                  |
-                  v
-            Solution Blueprint
+        v
+ Topological Order + Frontier   deterministic, no LLM
+        |
+        v
+     Artefact Plan              plan.json / plan.md
+        |
+        :  <-- THE GAP: no runner exists here
+        v
+ [ Skills: written instructions for 6 artefact types ]
+        |
+        v
+   Tier-0 Gate                  structure only
 ```
 
-The eventual autonomous layer can sit above this deterministic kernel. Coding/deployment executors such as Claude Code, Codex, or OpenHands should remain adapters, not be reinvented inside Throughline.
+## Design principles
+
+1. The graph routes work; the model does not invent workflow order.
+2. Artefacts are typed and provenance-aware.
+3. Every important claim is `observed`, `cited`, `derived`, or `assumed`.
+4. Acceptance criteria are frozen by a human before downstream solutioning.
+5. Deterministic gates outrank LLM judgement.
+6. The author never grades its own work. *(Aspiration: not yet enforced — see
+   [Known limitations](#known-limitations).)*
+7. Human approvals are explicit and typed. *(Partially: the plan names them;
+   there is no approval object.)*
+8. No execution capability is implied by a plan.
+9. Unknowns become research questions or expiring assumptions — not invented facts.
+10. Project-management outputs are first-class artefact **types** in the
+    registry. Nothing calculates them.
+
+The 15 lifecycle phases in `ontology/views/phases-15.yaml` are a **reporting
+projection**, not the control structure. Nothing currently reads that file.
+
+## Quick start
+
+```bash
+PYTHONPATH=src python -m throughline.cli plan projects/pp20/problem.yaml --out projects/pp20/blueprint
+```
+
+Produces `plan.json` and `plan.md`. For PP20 that is a plan of **49 artefacts**,
+of which 7 have a producer and 42 do not.
+
+Run the checks:
+
+```bash
+make check
+```
+
+That runs the test suite, exhaustive archetype graph validation, and the
+artefact gate over the benchmark fixtures.
+
+## Repository map
+
+```text
+ontology/artefacts/core.yaml      58 artefact types; the dependency graph
+ontology/archetypes/              11 solution classes
+ontology/artefact-contract.yaml   the one canonical output contract
+src/throughline/                  the deterministic kernel (no LLM, no network)
+scripts/gates/                    Tier-0 artefact gate
+scripts/validate_ontology.py      exhaustive archetype resolution check
+.claude/skills/                   7 Skills: 6 chain + 1 umbrella
+tests/fixtures/pp20/              hand-written benchmark artefacts (TEST DATA)
+tests/fixtures/broken/            deliberate false-positive probes
+projects/pp20/problem.yaml        the PP20 intake record
+docs/artefact-contract.md         the contract, explained
+```
+
+## Known limitations
+
+- **No generation.** The gap between the plan and the Skills is not bridged by
+  code. This is the next implementation step, not a solved problem.
+- **7 of 58 artefact types have a producer.** For PP20 that is 7 of 49 planned
+  artefacts. The six-step chain is an MVP slice, not a solution.
+- **The chain has real dependency deficits.** `requirements` requires
+  `business-objectives` and `stakeholder-map`; `solution-recommendation` requires
+  `kpi-model`. No Skill produces any of them. These are declared explicitly in
+  each artefact's `unsatisfied_inputs` and reported by the kernel rather than
+  hidden.
+- **The gate validates structure, not truth.** A conformant artefact is
+  well-formed and honest about its gaps. It is not correct, evidenced or
+  approved. Tiers 1–4 do not exist.
+- **Principle 6 is unenforced.** Nothing structurally prevents the same
+  invocation from authoring and grading an artefact.
+- **Classification is keyword matching** with no stemming; `supplier` will not
+  match `suppliers`.
+- **`schemas/intake.schema.json` is not enforced.** No validation runs against it.
+- **`ontology/capabilities.yaml`, `ontology/views/phases-15.yaml`,
+  `ontology/policies/` are inert.** Nothing reads them.
+- **`migration-cutover` and `retirement-plan`** exist in the registry but are
+  named by no archetype.
 
 ## Status
 
-`v0.1 blueprint compiler`
+`v0.2 artefact planner`
 
-This repository is a design-and-prototype foundation, not production enterprise software.
-
-
-## First artefact-producing pipeline
-
-Throughline now includes a first real solutioning chain:
-
-`problem-frame → evidence-brief → current-state-assessment → requirements → solution-options → solution-recommendation`
-
-A benchmark instance is included under `examples/pp20/`. The chain is generic; PP20 is test data, not a hard-coded workflow.
-
-Claude Skills are stored under `.claude/skills/`. The repository remains blueprint-only: it does not execute production changes.
+A design-and-prototype foundation, not production software. It is deliberately
+smaller than it looks: the value is in the typed artefact graph and the
+deterministic kernel, not in any generated output.

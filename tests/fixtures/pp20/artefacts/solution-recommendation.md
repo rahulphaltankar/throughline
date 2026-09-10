@@ -1,9 +1,57 @@
 ---
 id: PP20-A06
 type: solution-recommendation
+schema_version: 1
+produced_by: skill:solution-recommendation
+inputs:
+- id: PP20-A01
+  type: problem-frame
+- id: PP20-A02
+  type: evidence-brief
+- id: PP20-A03
+  type: current-state-assessment
+- id: PP20-A04
+  type: requirements
+- id: PP20-A05
+  type: solution-options
+unsatisfied_inputs:
+- type: kpi-model
+  reason: No Skill currently produces kpi-model. The recommendation therefore has no agreed baseline or
+    target measure to be judged against.
 status: proposed
-evidence_classes: derived, assumed, cited
-inputs: [PP20-A01, PP20-A02, PP20-A03, PP20-A04, PP20-A05]
+evidence:
+- claim: The recommended hybrid approach is Option C from the option set, not an independently invented
+    design.
+  class: derived
+  source: PP20-A05
+  confidence: high
+- claim: The GBP 500k figure is the supplied commercial benchmark, not an engineering estimate.
+  class: observed
+  source: projects/pp20/problem.yaml constraints
+  confidence: high
+- claim: Effort of ~35-60 person-months and 16-24 weeks to first pilot is a planning hypothesis.
+  class: assumed
+  source: No estimation model, historical delivery data or PMO calculation supports this range.
+  confidence: low
+- claim: The named technology candidates are illustrative families, not a selection.
+  class: assumed
+  source: No vendor-evaluation artefact has been produced.
+  confidence: low
+assumptions:
+- id: A9
+  statement: The OEM has an existing strategic data platform that can host most of the data-product layer.
+  validation: Confirm the incumbent platform and its suitability during discovery.
+- id: A10
+  statement: Source access and data-owner availability will not block the pilot.
+  validation: Secure named owners and access approvals before delivery starts.
+open_questions:
+- id: Q15
+  question: Which single domain data product is the pilot?
+  owner: CDIO / Enterprise Architect (intake buyer)
+- id: Q16
+  question: Which strategic data platform is the target?
+  owner: Enterprise Architect
+review_required: true
 ---
 # End-to-End Solution Blueprint — PP20
 

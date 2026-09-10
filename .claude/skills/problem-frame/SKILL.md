@@ -1,5 +1,5 @@
 ---
-name: produce-problem-frame
+name: problem-frame
 description: Produce a traceable problem-frame artefact from a business pain point, idea, hypothesis, or opportunity. Use when defining what problem is being solved, who is affected, what evidence exists, what is assumed, and what outcomes matter.
 ---
 # Produce Problem Frame
@@ -19,7 +19,23 @@ Produce exactly one artefact: `problem-frame`.
 6. State at least one falsification question for the central hypothesis.
 
 ## Output contract
-Create a markdown artefact with YAML frontmatter containing `id`, `type`, `status`, `evidence_classes`, `assumptions`, `open_questions`, and `inputs`. Then use these sections: Source statement; Problem; Who is affected; Evidence; Impact; Desired outcomes; In scope; Out of scope; Hypotheses; Unknowns; Falsification questions.
+Conform to the canonical artefact contract. Do not invent a frontmatter variant.
+
+- Machine-readable: `ontology/artefact-contract.yaml`
+- Explained: `docs/artefact-contract.md`
+- Packaged copy: `.claude/skills/solution-blueprint/reference/artefact-output-contract.md`
+
+Set `type: problem-frame` and `produced_by: skill:problem-frame`. Reference the
+originating intake as an input of type `intake`.
+
+Body sections: Source statement; Problem; Who is affected; Evidence; Impact;
+Desired outcomes; In scope; Out of scope; Hypotheses; Unknowns; Falsification
+questions.
 
 ## Gate readiness
-The artefact must have at least one evidence item, one explicit assumption or an explicit statement that none are required, and at least one falsification question.
+`problem-frame` is `evidence_required`, so the `evidence` list must be non-empty
+and every entry needs a class, source and confidence. Every assumption needs a
+validation method. The registry requires these headings to be present verbatim:
+`## Problem`, `## Evidence`, `## Hypotheses`, `## Falsification questions`.
+
+The gate checks structure only. Passing it does not make the frame correct.

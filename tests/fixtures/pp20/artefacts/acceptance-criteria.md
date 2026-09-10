@@ -1,9 +1,27 @@
 ---
 id: PP20-A04b
 type: acceptance-criteria
+schema_version: 1
+produced_by: skill:requirements
+inputs:
+- id: PP20-A04
+  type: requirements
 status: proposed
-evidence_classes: derived, assumed
-inputs: [PP20-A04]
+evidence:
+- claim: Thresholds dependent on an unmeasured baseline are marked TBD rather than invented.
+  class: derived
+  source: PP20-A04 Verification section
+  confidence: high
+assumptions:
+- id: A7
+  statement: A baseline measurement will be obtained before thresholds are frozen.
+  validation: Run the discovery sprint and record the baseline. Until then this artefact cannot reach
+    status accepted.
+open_questions:
+- id: Q13
+  question: Who is the accountable human owner who will freeze the TBD thresholds?
+  owner: CDIO / Enterprise Architect (intake buyer)
+review_required: true
 ---
 # Acceptance Criteria — PP20
 

@@ -168,6 +168,21 @@ Unless the user requests otherwise, deliver a professional solution blueprint wi
 29. Open questions requiring client input
 30. Recommended next actions
 
+## Artefact contract
+
+When you emit a typed artefact rather than a narrative document, conform to the
+canonical contract in `reference/artefact-output-contract.md`. There is exactly
+one contract; do not invent a variant. `scripts/gates/validate_artifact.py`
+enforces it and rejects unknown artefact types.
+
+## Relationship to the kernel
+
+The deterministic kernel decides *which* artefacts a problem needs and in what
+order. Run `python -m throughline.cli plan <intake>` to get that plan rather than
+inventing a workflow order here. Six artefact types currently have a Skill
+binding; the rest of the plan is manual work. Do not present a subset as a
+complete blueprint.
+
 ## Evidence discipline
 
 Every material claim should be classified as:

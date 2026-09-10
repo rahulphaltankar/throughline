@@ -2,6 +2,12 @@
   name: Problem Frame
   purpose: Establish the problem, trigger, boundaries, stakeholders, evidence signal, and hypotheses.
   capability: Problem Discovery & Business Analysis
+  produced_by: skill:problem-frame
+  required_sections:
+    - "## Problem"
+    - "## Evidence"
+    - "## Hypotheses"
+    - "## Falsification questions"
   requires: []
   evidence_required: true
 
@@ -9,6 +15,11 @@
   name: Evidence Brief
   purpose: Consolidate research findings, sources, contradictions, confidence, and evidence gaps.
   capability: Research & Intelligence
+  produced_by: skill:evidence-brief
+  required_sections:
+    - "## Claim ledger"
+    - "## Supporting evidence"
+    - "## Evidence gaps"
   requires: [problem-frame]
   evidence_required: true
 
@@ -22,6 +33,12 @@
   name: Current-State Assessment
   purpose: Describe current processes, systems, data, constraints, and maturity.
   capability: Enterprise / Business Architecture
+  produced_by: skill:current-state-assessment
+  required_sections:
+    - "## Current business process"
+    - "## Current systems landscape"
+    - "## Current data landscape"
+    - "## Validation questions"
   requires: [problem-frame, evidence-brief]
   evidence_required: true
 
@@ -54,6 +71,12 @@
   name: Requirements Catalogue
   purpose: Define business, functional, non-functional, data, integration, and quality requirements.
   capability: Requirements Engineering
+  produced_by: skill:requirements
+  required_sections:
+    - "## Business requirements"
+    - "## Functional requirements"
+    - "## Non-functional requirements"
+    - "## Verification"
   requires: [current-state-assessment, business-objectives, stakeholder-map]
   evidence_required: true
 
@@ -61,6 +84,10 @@
   name: Acceptance Criteria
   purpose: Freeze objective conditions under which requirements are accepted.
   capability: Requirements Engineering
+  produced_by: skill:requirements
+  required_sections:
+    - "## Business outcomes"
+    - "## Freeze rule"
   requires: [requirements]
   human_required: true
 
@@ -74,12 +101,27 @@
   name: Solution Option Set
   purpose: Compare candidate solution approaches and trade-offs.
   capability: Solution Evaluation & Options Analysis
+  produced_by: skill:solution-options
+  required_sections:
+    - "## Evaluation criteria"
+    - "## Option A*"
+    - "## Option B*"
+    - "## Comparison matrix"
   requires: [requirements, evidence-brief]
 
 - id: solution-recommendation
   name: Solution Recommendation
   purpose: Recommend a solution with rationale, alternatives rejected, assumptions, and trade-offs.
   capability: Solution Evaluation & Options Analysis
+  produced_by: skill:solution-recommendation
+  required_sections:
+    - "## Executive recommendation"
+    - "## Recommended solution"
+    - "## Architecture"
+    - "## Delivery plan"
+    - "## Budget"
+    - "## Operating model"
+    - "## Human decisions required"
   requires: [solution-options, kpi-model]
   human_required: true
 
