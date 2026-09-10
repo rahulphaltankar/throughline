@@ -1,0 +1,19 @@
+id: regulated
+name: Regulated / High-Assurance Solution
+match_terms:
+  - compliance
+  - r155
+  - r156
+  - iso 26262
+  - iso 21434
+  - gdpr
+  - privacy
+  - homologation
+  - safety
+  - cybersecurity
+term_weight: 2
+required_artifacts:
+  - regulatory-assessment
+  - controls-matrix
+  - security-threat-model
+  - privacy-assessment

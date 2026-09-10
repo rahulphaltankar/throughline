@@ -1,0 +1,49 @@
+id: general-solution
+name: General Solution Blueprint
+match_terms: []
+always: true
+always_score: 1
+required_artifacts:
+  - problem-frame
+  - evidence-brief
+  - stakeholder-map
+  - current-state-assessment
+  - business-objectives
+  - kpi-model
+  - assumption-register
+  - open-questions
+  - requirements
+  - acceptance-criteria
+  - traceability
+  - solution-options
+  - solution-recommendation
+  - target-architecture
+  - logical-architecture
+  - deployment-architecture
+  - risk-register
+  - regulatory-assessment
+  - security-threat-model
+  - business-case
+  - tco-model
+  - roi-model
+  - controls-matrix
+  - delivery-strategy
+  - wbs
+  - estimation
+  - resource-plan
+  - dependency-map
+  - delivery-schedule
+  - budget-plan
+  - raid-log
+  - test-strategy
+  - test-suite
+  - release-plan
+  - operational-readiness
+  - service-model
+  - runbook
+  - observability
+  - change-management
+  - benefits-realisation
+  - evidence-pack
+  - handover-pack
+  - continuous-improvement

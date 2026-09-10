@@ -1,0 +1,14 @@
+id: computer-vision
+name: Computer Vision / Edge AI
+match_terms:
+  - vision
+  - computer vision
+  - defect inspection
+  - image inspection
+  - edge inference
+term_weight: 2
+required_artifacts:
+  - ai-applicability
+  - ai-architecture
+  - ai-evaluation-plan
+  - deployment-architecture

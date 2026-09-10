@@ -1,0 +1,14 @@
+id: workforce
+name: Workforce / Skills Intelligence
+match_terms:
+  - workforce
+  - reskilling
+  - skills
+  - training
+  - capacity
+term_weight: 1
+required_artifacts:
+  - stakeholder-map
+  - data-model
+  - change-management
+  - training-plan

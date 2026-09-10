@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Throughline Intake",
+  "type": "object",
+  "required": ["id", "title", "organisation", "problem"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "organisation": {"type": "string", "minLength": 1},
+    "segment": {"type": ["string", "null"]},
+    "domain": {"type": ["string", "null"]},
+    "problem": {"type": "string", "minLength": 1},
+    "evidence_signal": {"type": ["string", "null"]},
+    "opportunity": {"type": ["string", "null"]},
+    "buyer": {"type": ["string", "null"]},
+    "components": {"type": "array", "items": {"type": "string"}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "source_key": {"type": ["string", "null"]},
+    "evidence_confidence": {"type": ["string", "null"]},
+    "metadata": {"type": "object"}
+  }
+}

@@ -1,0 +1,23 @@
+id: data-platform
+name: Data Platform / Semantic Integration
+match_terms:
+  - data mesh
+  - semantic layer
+  - ontology
+  - knowledge layer
+  - canonical model
+  - data product
+  - plm
+  - erp
+  - alm
+  - mes
+  - digital thread
+  - traceability
+term_weight: 2
+required_artifacts:
+  - data-model
+  - ontology
+  - data-products
+  - data-lineage
+  - integration-catalogue
+  - api-contracts

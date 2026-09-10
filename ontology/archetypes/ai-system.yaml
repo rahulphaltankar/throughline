@@ -1,0 +1,18 @@
+id: ai-system
+name: AI / GenAI System
+match_terms:
+  - ai
+  - genai
+  - agentic
+  - agent
+  - llm
+  - rag
+  - machine learning
+  - copilot
+  - vision model
+  - nlp
+term_weight: 2
+required_artifacts:
+  - ai-applicability
+  - ai-architecture
+  - ai-evaluation-plan

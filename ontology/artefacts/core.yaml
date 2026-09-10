@@ -1,0 +1,368 @@
+- id: problem-frame
+  name: Problem Frame
+  purpose: Establish the problem, trigger, boundaries, stakeholders, evidence signal, and hypotheses.
+  capability: Problem Discovery & Business Analysis
+  requires: []
+  evidence_required: true
+
+- id: evidence-brief
+  name: Evidence Brief
+  purpose: Consolidate research findings, sources, contradictions, confidence, and evidence gaps.
+  capability: Research & Intelligence
+  requires: [problem-frame]
+  evidence_required: true
+
+- id: stakeholder-map
+  name: Stakeholder Map
+  purpose: Identify stakeholders, roles, influence, interests, and accountability.
+  capability: Business Analysis
+  requires: [problem-frame]
+
+- id: current-state-assessment
+  name: Current-State Assessment
+  purpose: Describe current processes, systems, data, constraints, and maturity.
+  capability: Enterprise / Business Architecture
+  requires: [problem-frame, evidence-brief]
+  evidence_required: true
+
+- id: business-objectives
+  name: Business Objectives & Outcomes
+  purpose: Define desired outcomes, measurable objectives, and constraints.
+  capability: Product Strategy & Product Management
+  requires: [problem-frame]
+
+- id: kpi-model
+  name: Success Metrics / KPI Model
+  purpose: Define baselines, target outcomes, measurement method, and owners.
+  capability: Product Strategy & Product Management
+  requires: [business-objectives]
+
+- id: assumption-register
+  name: Assumption Register
+  purpose: Track unknowns as falsifiable, expiring hypotheses with owners and blast radius.
+  capability: Risk, Assumptions, Decisions & Governance
+  requires: [problem-frame]
+  evidence_required: true
+
+- id: open-questions
+  name: Open Questions Register
+  purpose: Record unresolved questions, severity, ownership, and resolution method.
+  capability: Risk, Assumptions, Decisions & Governance
+  requires: [problem-frame]
+
+- id: requirements
+  name: Requirements Catalogue
+  purpose: Define business, functional, non-functional, data, integration, and quality requirements.
+  capability: Requirements Engineering
+  requires: [current-state-assessment, business-objectives, stakeholder-map]
+  evidence_required: true
+
+- id: acceptance-criteria
+  name: Acceptance Criteria
+  purpose: Freeze objective conditions under which requirements are accepted.
+  capability: Requirements Engineering
+  requires: [requirements]
+  human_required: true
+
+- id: traceability
+  name: Traceability Matrix
+  purpose: Link objectives and requirements to architecture, tests, delivery, and evidence.
+  capability: Knowledge, Evidence & Traceability
+  requires: [requirements, acceptance-criteria]
+
+- id: solution-options
+  name: Solution Option Set
+  purpose: Compare candidate solution approaches and trade-offs.
+  capability: Solution Evaluation & Options Analysis
+  requires: [requirements, evidence-brief]
+
+- id: solution-recommendation
+  name: Solution Recommendation
+  purpose: Recommend a solution with rationale, alternatives rejected, assumptions, and trade-offs.
+  capability: Solution Evaluation & Options Analysis
+  requires: [solution-options, kpi-model]
+  human_required: true
+
+- id: target-architecture
+  name: Target-State Architecture
+  purpose: Define business, application, data, technology, and integration target state.
+  capability: Enterprise / Business Architecture
+  requires: [solution-recommendation, current-state-assessment]
+  evidence_required: true
+
+- id: logical-architecture
+  name: Logical Architecture
+  purpose: Define components, responsibilities, services, and relationships.
+  capability: Solution / Application Architecture
+  requires: [target-architecture]
+
+- id: deployment-architecture
+  name: Physical / Deployment Architecture
+  purpose: Define environments, hosting, runtime placement, and deployment topology.
+  capability: Infrastructure, Cloud & DevOps
+  requires: [logical-architecture]
+
+- id: data-model
+  name: Data Domain Model
+  purpose: Define data domains, entities, relationships, ownership, and semantics.
+  capability: Data Architecture & Data Engineering
+  requires: [target-architecture, requirements]
+
+- id: ontology
+  name: Canonical Data Model / Ontology
+  purpose: Define common semantics and identifiers across domain systems.
+  capability: Data Architecture & Data Engineering
+  requires: [data-model, current-state-assessment]
+
+- id: data-products
+  name: Data Product Definition
+  purpose: Define data product purpose, ownership, consumers, quality, and service expectations.
+  capability: Data Architecture & Data Engineering
+  requires: [data-model, ontology]
+
+- id: data-lineage
+  name: Data Flow / Lineage Model
+  purpose: Map source-to-destination data flows and provenance.
+  capability: Data Architecture & Data Engineering
+  requires: [data-model, data-products]
+  evidence_required: true
+
+- id: integration-catalogue
+  name: Integration Catalogue
+  purpose: Identify systems, interfaces, protocols, dependencies, and ownership.
+  capability: Integration & API Architecture
+  requires: [logical-architecture, data-model]
+
+- id: api-contracts
+  name: API / Interface Contracts
+  purpose: Define interface schemas, contracts, compatibility, and events where applicable.
+  capability: Integration & API Architecture
+  requires: [integration-catalogue]
+
+- id: ai-applicability
+  name: AI Applicability Assessment
+  purpose: Determine whether AI/GenAI is necessary, useful, proportionate, and feasible.
+  capability: AI / ML / GenAI Architecture & Engineering
+  requires: [solution-options, requirements]
+  evidence_required: true
+
+- id: ai-architecture
+  name: AI / ML / GenAI Architecture
+  purpose: Define models, RAG, agents, tools, retrieval, orchestration, and boundaries where applicable.
+  capability: AI / ML / GenAI Architecture & Engineering
+  requires: [ai-applicability, target-architecture]
+
+- id: ai-evaluation-plan
+  name: AI Evaluation Plan
+  purpose: Define datasets, golden sets, evaluation metrics, thresholds, and tests.
+  capability: AI / ML / GenAI Architecture & Engineering
+  requires: [ai-architecture, acceptance-criteria]
+
+- id: security-threat-model
+  name: Threat Model / Security Architecture
+  purpose: Identify assets, threats, trust boundaries, controls, and residual risks.
+  capability: Cybersecurity, Privacy & Resilience
+  requires: [target-architecture, data-lineage]
+  evidence_required: true
+
+- id: privacy-assessment
+  name: Privacy Assessment
+  purpose: Identify personal data, purposes, controls, retention, and privacy risks.
+  capability: Cybersecurity, Privacy & Resilience
+  requires: [data-lineage, target-architecture]
+
+- id: regulatory-assessment
+  name: Regulatory Applicability / Classification
+  purpose: Identify applicable regimes, obligations, classifications, and required evidence.
+  capability: Regulatory, Compliance & AI Governance
+  requires: [problem-frame, evidence-brief, target-architecture]
+  human_required: true
+  evidence_required: true
+
+- id: controls-matrix
+  name: Control & Compliance Matrix
+  purpose: Map obligations to controls, evidence, owners, and status.
+  capability: Regulatory, Compliance & AI Governance
+  requires: [regulatory-assessment, security-threat-model]
+
+- id: risk-register
+  name: Risk Register
+  purpose: Record risks, probability, impact, mitigations, owners, and residual risk.
+  capability: Risk, Assumptions, Decisions & Governance
+  requires: [solution-recommendation]
+  evidence_required: true
+
+- id: business-case
+  name: Business Case
+  purpose: Compare cost, value, options, assumptions, and investment rationale.
+  capability: Commercial, Financial & Business Case
+  requires: [solution-recommendation, kpi-model]
+  human_required: true
+
+- id: tco-model
+  name: TCO / Cost Model
+  purpose: Estimate implementation, licensing, infrastructure, people, support, and lifecycle costs.
+  capability: Commercial, Financial & Business Case
+  requires: [target-architecture, solution-recommendation]
+
+- id: roi-model
+  name: ROI / Benefits Model
+  purpose: Model baseline, benefit mechanisms, timing, assumptions, and value.
+  capability: Commercial, Financial & Business Case
+  requires: [business-case, kpi-model]
+
+- id: vendor-evaluation
+  name: Vendor / Technology Evaluation
+  purpose: Evaluate candidate technologies and vendors by capability fit, cost, risk, and lock-in.
+  capability: Procurement, Vendor & Partner Strategy
+  requires: [solution-options, target-architecture]
+
+- id: build-buy-partner
+  name: Build / Buy / Partner Assessment
+  purpose: Determine sourcing strategy and rationale.
+  capability: Procurement, Vendor & Partner Strategy
+  requires: [vendor-evaluation, business-case]
+
+- id: delivery-strategy
+  name: Delivery Strategy
+  purpose: Define workstreams, delivery method, sequencing, governance, and delivery assumptions.
+  capability: Delivery Management / Project Management / PMO
+  requires: [solution-recommendation, risk-register]
+
+- id: wbs
+  name: Work Breakdown Structure
+  purpose: Decompose solution deliverables into workstreams, tasks, and dependencies.
+  capability: Delivery Management / Project Management / PMO
+  requires: [delivery-strategy, traceability]
+
+- id: estimation
+  name: Effort / Estimation Model
+  purpose: Estimate effort ranges, complexity, assumptions, confidence, and basis.
+  capability: Delivery Management / Project Management / PMO
+  requires: [wbs, target-architecture]
+
+- id: resource-plan
+  name: Resource / Skills Plan
+  purpose: Define roles, skills, FTEs, capacity, sourcing, and timing.
+  capability: Delivery Management / Project Management / PMO
+  requires: [wbs, estimation]
+
+- id: dependency-map
+  name: Dependency Map
+  purpose: Map technical, organisational, data, vendor, and sequencing dependencies.
+  capability: Delivery Management / Project Management / PMO
+  requires: [wbs, target-architecture]
+
+- id: delivery-schedule
+  name: Delivery Schedule / Roadmap
+  purpose: Define dates, milestones, sequencing, dependencies, and critical path assumptions.
+  capability: Delivery Management / Project Management / PMO
+  requires: [estimation, resource-plan, dependency-map]
+
+- id: budget-plan
+  name: Budget / Funding Plan
+  purpose: Translate effort and technology assumptions into budget ranges and funding needs.
+  capability: Delivery Management / Project Management / PMO
+  requires: [tco-model, estimation, resource-plan]
+
+- id: raid-log
+  name: RAID Log
+  purpose: Track risks, assumptions, issues, and dependencies during delivery planning.
+  capability: Delivery Management / Project Management / PMO
+  requires: [risk-register, assumption-register, dependency-map]
+
+- id: test-strategy
+  name: Test Strategy
+  purpose: Define test levels, quality objectives, environments, ownership, and release gates.
+  capability: Quality Engineering & Validation
+  requires: [acceptance-criteria, target-architecture, traceability]
+
+- id: test-suite
+  name: Test Plan / Test Suite
+  purpose: Define executable and reviewable tests mapped to requirements and acceptance criteria.
+  capability: Quality Engineering & Validation
+  requires: [test-strategy, traceability]
+
+- id: migration-cutover
+  name: Migration / Cutover Plan
+  purpose: Define migration, cutover, validation, rollback, and contingency.
+  capability: Deployment, Migration & Release Management
+  requires: [data-lineage, deployment-architecture]
+
+- id: release-plan
+  name: Release Plan
+  purpose: Define release scope, readiness, rollout, rollback, and governance.
+  capability: Deployment, Migration & Release Management
+  requires: [test-suite, deployment-architecture]
+
+- id: operational-readiness
+  name: Operational Readiness Assessment
+  purpose: Verify monitoring, support, ownership, service levels, and recovery readiness.
+  capability: Service Management & Operations
+  requires: [release-plan, test-suite]
+  human_required: true
+
+- id: service-model
+  name: Service / Operating Model
+  purpose: Define BAU ownership, support tiers, SLAs/SLOs, escalation, and service processes.
+  capability: Service Management & Operations
+  requires: [target-architecture, operational-readiness]
+
+- id: runbook
+  name: Runbook
+  purpose: Define repeatable operational procedures for normal and abnormal conditions.
+  capability: Service Management & Operations
+  requires: [service-model]
+
+- id: observability
+  name: Observability Specification
+  purpose: Define logs, metrics, traces, alerts, dashboards, and SLOs.
+  capability: SRE / Observability / Reliability Engineering
+  requires: [target-architecture, service-model]
+
+- id: change-management
+  name: Change Management Plan
+  purpose: Define organisational impacts, communications, adoption, and transition.
+  capability: Change Management, Adoption & Training
+  requires: [stakeholder-map, target-architecture]
+
+- id: training-plan
+  name: Training / Adoption Plan
+  purpose: Define audiences, learning needs, enablement, and adoption measurement.
+  capability: Change Management, Adoption & Training
+  requires: [change-management]
+  optional: true
+
+- id: benefits-realisation
+  name: Benefits Realisation Plan
+  purpose: Define benefit owners, baselines, cadence, and value-realisation tracking.
+  capability: Lifecycle / Continuous Improvement & Value
+  requires: [roi-model, kpi-model, delivery-schedule]
+
+- id: evidence-pack
+  name: Evidence Pack
+  purpose: Consolidate proof of requirements, controls, tests, decisions, and approvals.
+  capability: Knowledge, Evidence & Traceability
+  requires: [traceability, controls-matrix, test-suite, operational-readiness]
+  human_required: true
+  evidence_required: true
+
+- id: handover-pack
+  name: Handover Pack
+  purpose: Transfer technical, operational, support, and ownership knowledge into BAU.
+  capability: Service Management & Operations
+  requires: [runbook, evidence-pack, service-model]
+
+- id: continuous-improvement
+  name: Lifecycle / Continuous Improvement Plan
+  purpose: Define review cadence, optimisation backlog, learning loops, and KPI review.
+  capability: Lifecycle / Continuous Improvement & Value
+  requires: [benefits-realisation, service-model]
+
+- id: retirement-plan
+  name: Retirement / Decommission Plan
+  purpose: Define retirement triggers, data retention, migration, dependency closure, and final review.
+  capability: Lifecycle / Obsolescence / Retirement
+  requires: [service-model, continuous-improvement]
+  optional: true
+  human_required: true

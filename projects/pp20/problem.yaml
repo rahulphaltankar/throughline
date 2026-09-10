@@ -1,0 +1,26 @@
+id: PP20
+title: Automotive Data Mesh / Knowledge Layer
+organisation: JLR / Bentley
+author: solution-blueprint-demo
+segment: Both
+domain: Data
+problem: No common semantic layer across PLM, ERP, ALM, MES and service. Digital-thread value depends on interoperable data.
+evidence_signal: Digital-thread value depends on interoperable data.
+opportunity: Automotive Data Mesh / Knowledge Layer
+buyer: CDIO / Enterprise Architect
+components:
+  - Canonical ontology
+  - APIs
+  - Event model
+  - Data products
+constraints:
+  - One domain data product for the first delivery motion
+  - Indicative time to first value is 20 weeks
+  - Indicative implementation price is GBP 500000
+  - Indicative recurring potential is GBP 300000 per year
+source_key: Tata Automotive Intelligence
+evidence_confidence: Medium
+metadata:
+  delivery_motion: One domain data product
+  priority: 10
+  difficulty: 9

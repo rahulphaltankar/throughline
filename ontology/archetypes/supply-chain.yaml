@@ -1,0 +1,15 @@
+id: supply-chain
+name: Supply Chain Intelligence
+match_terms:
+  - supplier
+  - supply chain
+  - disruption
+  - tier-1
+  - tier-2
+  - procurement
+term_weight: 2
+required_artifacts:
+  - data-model
+  - data-lineage
+  - integration-catalogue
+  - data-products

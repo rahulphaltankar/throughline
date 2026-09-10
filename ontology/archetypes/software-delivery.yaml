@@ -1,0 +1,15 @@
+id: software-delivery
+name: Automotive Software Delivery
+match_terms:
+  - software factory
+  - devsecops
+  - cicd
+  - ota
+  - ecu
+  - embedded software
+  - release
+  - sbom
+term_weight: 2
+required_artifacts:
+  - integration-catalogue
+  - api-contracts

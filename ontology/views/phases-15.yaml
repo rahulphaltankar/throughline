@@ -1,0 +1,16 @@
+# Human-facing reporting projection. The kernel does not use phases for routing.
+1: Problem Discovery & Validation
+2: Regulatory, AI & Strategic Feasibility
+3: Requirements & Solution Definition
+4: Product & Delivery Planning
+5: Architecture & Technology Design
+6: UX, Prototyping & Validation
+7: Detailed Specification & Engineering Setup
+8: Solution Development / Build
+9: Verification, Validation & Testing
+10: Production Readiness & Governance Sign-off
+11: Deployment & Go-Live
+12: Operational Transition / BAU Handover
+13: Operations & Service Management
+14: Continuous Improvement & Evolution
+15: Retirement / Decommissioning

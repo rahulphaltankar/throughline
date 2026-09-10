@@ -1,0 +1,14 @@
+id: customer-config
+name: Customer / Configuration Intelligence
+match_terms:
+  - mulliner
+  - configuration
+  - personalisation
+  - recommender
+  - customer
+  - salesforce
+term_weight: 1
+required_artifacts:
+  - data-model
+  - integration-catalogue
+  - api-contracts

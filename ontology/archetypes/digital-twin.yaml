@@ -1,0 +1,14 @@
+id: digital-twin
+name: Digital Twin / Simulation
+match_terms:
+  - digital twin
+  - simulation
+  - virtual commissioning
+  - scenario
+  - surrogate model
+  - hpc
+term_weight: 2
+required_artifacts:
+  - data-model
+  - data-lineage
+  - deployment-architecture
