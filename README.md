@@ -106,3 +106,14 @@ The eventual autonomous layer can sit above this deterministic kernel. Coding/de
 `v0.1 blueprint compiler`
 
 This repository is a design-and-prototype foundation, not production enterprise software.
+
+
+## First artefact-producing pipeline
+
+Throughline now includes a first real solutioning chain:
+
+`problem-frame → evidence-brief → current-state-assessment → requirements → solution-options → solution-recommendation`
+
+A benchmark instance is included under `examples/pp20/`. The chain is generic; PP20 is test data, not a hard-coded workflow.
+
+Claude Skills are stored under `.claude/skills/`. The repository remains blueprint-only: it does not execute production changes.
