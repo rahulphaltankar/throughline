@@ -11,8 +11,8 @@ It plans the work. It does not do the work.
 
 > **Read this before evaluating the repo.** Throughline does not generate
 > solution content, does not call an LLM, does not estimate cost or effort, and
-> does not execute anything. Six artefact types have a Claude Skill that tells a
-> model how to write them; the other 52 have no producer at all. See
+> has no real provider adapter. Twelve artefact types have a Claude Skill that
+> tells a model how to write them; the other 46 have no producer at all. See
 > [What exists today](#what-exists-today).
 
 ## What exists today
@@ -23,11 +23,12 @@ It plans the work. It does not do the work.
 | Archetype routing — 11 keyword-matched solution classes | **Implemented** |
 | Transitive dependency closure | **Implemented** |
 | Topological ordering + dependency-ready frontier | **Implemented** |
-| Skill bindings (`produced_by`) for 7 of 58 artefact types | **Implemented** |
+| Skill bindings (`produced_by`) for 12 of 58 artefact types | **Implemented** |
 | Canonical artefact output contract | **Implemented** |
 | Tier-0 deterministic gate (structure only) | **Implemented** |
-| Claude Skills — procedural instructions for 6 artefact types | **Implemented (prose)** |
-| Artefact *generation* | **Not implemented** |
+| Claude Skills — procedural instructions for 11 single-purpose artefact types, plus `requirements` | **Implemented (prose)** |
+| Provider-independent execution runner | **Implemented (local fixture adapter only)** |
+| Real LLM artefact generation | **Not implemented** |
 | Gate tiers 1–4 (structural predicates, adversarial, rubric, human) | **Not implemented** |
 | PMO calculation (WBS, estimation, schedule, budget) | **Not implemented** |
 | Ledger, versioning, staleness propagation, approval objects | **Not implemented** |
@@ -40,10 +41,10 @@ writes an artefact.
 
 ### What "Skill binding" does and does not mean
 
-Seven artefact types resolve to a `SKILL.md` — a set of written instructions for
-a model. There is **no runner**. Nothing in `src/` or `scripts/` invokes a model,
-passes it upstream artefacts, or writes an output file. A human or an agent must
-read the Skill and do the work.
+Twelve artefact types resolve to a `SKILL.md` — a set of written instructions
+for a model. The execution runner resolves the binding and passes a complete
+work order to an adapter; its only adapter copies controlled fixtures. Nothing
+in the repository invokes a model.
 
 The artefacts under `tests/fixtures/pp20/` are **hand-written test data** used to
 exercise the gate. They are not system output and must never be presented as
@@ -72,9 +73,10 @@ Problem / Opportunity
         v
      Artefact Plan              plan.json / plan.md
         |
-        :  <-- THE GAP: no runner exists here
         v
- [ Skills: written instructions for 6 artefact types ]
+ Provider-independent runner     (`scripts/run_pipeline.py`)
+        v
+ [ Local test adapter / future provider adapter ]
         |
         v
    Tier-0 Gate                  structure only
@@ -106,7 +108,7 @@ PYTHONPATH=src python -m throughline.cli plan projects/pp20/problem.yaml --out p
 ```
 
 Produces `plan.json` and `plan.md`. For PP20 that is a plan of **49 artefacts**,
-of which 7 have a producer and 42 do not.
+of which 12 have a producer and 37 do not.
 
 Run the checks:
 
@@ -126,7 +128,7 @@ ontology/artefact-contract.yaml   the one canonical output contract
 src/throughline/                  the deterministic kernel (no LLM, no network)
 scripts/gates/                    Tier-0 artefact gate
 scripts/validate_ontology.py      exhaustive archetype resolution check
-.claude/skills/                   7 Skills: 6 chain + 1 umbrella
+.claude/skills/                   12 Skills: 11 chain + 1 umbrella
 tests/fixtures/pp20/              hand-written benchmark artefacts (TEST DATA)
 tests/fixtures/broken/            deliberate false-positive probes
 projects/pp20/problem.yaml        the PP20 intake record
@@ -135,15 +137,13 @@ docs/artefact-contract.md         the contract, explained
 
 ## Known limitations
 
-- **No generation.** The gap between the plan and the Skills is not bridged by
-  code. This is the next implementation step, not a solved problem.
-- **7 of 58 artefact types have a producer.** For PP20 that is 7 of 49 planned
-  artefacts. The six-step chain is an MVP slice, not a solution.
-- **The chain has real dependency deficits.** `requirements` requires
-  `business-objectives` and `stakeholder-map`; `solution-recommendation` requires
-  `kpi-model`. No Skill produces any of them. These are declared explicitly in
-  each artefact's `unsatisfied_inputs` and reported by the kernel rather than
-  hidden.
+- **No real generation.** The runner currently has only a local fixture adapter
+  that copies controlled test data. No LLM or external provider adapter exists.
+- **12 of 58 artefact types have a producer.** For PP20 that is 12 of 49 planned
+  artefacts. The bound slice is still not a complete solution blueprint.
+- **The remaining frontier is unbound.** After the PP20 bound slice, the local
+  runner blocks on `business-case`, `risk-register`, `target-architecture`, and
+  `traceability`; it does not manufacture them.
 - **The gate validates structure, not truth.** A conformant artefact is
   well-formed and honest about its gaps. It is not correct, evidenced or
   approved. Tiers 1–4 do not exist.

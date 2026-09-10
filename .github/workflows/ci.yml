@@ -23,6 +23,9 @@ jobs:
       - name: Artefact gate over PP20 benchmark fixtures
         run: python scripts/run_pp20_pipeline.py
 
+      - name: Local execution-layer smoke test
+        run: python scripts/run_pipeline.py projects/pp20/problem.yaml --out /tmp/throughline-run
+
       - name: Every broken fixture must be rejected
         run: |
           set -e

@@ -27,6 +27,12 @@
   name: Stakeholder Map
   purpose: Identify stakeholders, roles, influence, interests, and accountability.
   capability: Business Analysis
+  produced_by: skill:stakeholder-map
+  required_sections:
+    - "## Stakeholder register"
+    - "## Influence and interests"
+    - "## Accountability"
+    - "## Validation questions"
   requires: [problem-frame]
 
 - id: current-state-assessment
@@ -46,18 +52,37 @@
   name: Business Objectives & Outcomes
   purpose: Define desired outcomes, measurable objectives, and constraints.
   capability: Product Strategy & Product Management
+  produced_by: skill:business-objectives
+  required_sections:
+    - "## Desired outcomes"
+    - "## Objectives"
+    - "## Constraints and trade-offs"
+    - "## Validation questions"
   requires: [problem-frame]
 
 - id: kpi-model
   name: Success Metrics / KPI Model
   purpose: Define baselines, target outcomes, measurement method, and owners.
   capability: Product Strategy & Product Management
+  produced_by: skill:kpi-model
+  required_sections:
+    - "## Outcome-to-metric mapping"
+    - "## Baselines"
+    - "## Targets"
+    - "## Measurement method"
+    - "## Owners and cadence"
   requires: [business-objectives]
 
 - id: assumption-register
   name: Assumption Register
   purpose: Track unknowns as falsifiable, expiring hypotheses with owners and blast radius.
   capability: Risk, Assumptions, Decisions & Governance
+  produced_by: skill:assumption-register
+  required_sections:
+    - "## Assumption register"
+    - "## Evidence boundary"
+    - "## Validation plan"
+    - "## Expiry and impact"
   requires: [problem-frame]
   evidence_required: true
 
@@ -65,6 +90,12 @@
   name: Open Questions Register
   purpose: Record unresolved questions, severity, ownership, and resolution method.
   capability: Risk, Assumptions, Decisions & Governance
+  produced_by: skill:open-questions
+  required_sections:
+    - "## Open questions"
+    - "## Prioritisation"
+    - "## Owners"
+    - "## Resolution methods"
   requires: [problem-frame]
 
 - id: requirements

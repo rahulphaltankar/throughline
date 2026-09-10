@@ -14,10 +14,8 @@ inputs:
   type: requirements
 - id: PP20-A05
   type: solution-options
-unsatisfied_inputs:
-- type: kpi-model
-  reason: No Skill currently produces kpi-model. The recommendation therefore has no agreed baseline or
-    target measure to be judged against.
+- id: PP20-KPI01
+  type: kpi-model
 status: proposed
 evidence:
 - claim: The recommended hybrid approach is Option C from the option set, not an independently invented

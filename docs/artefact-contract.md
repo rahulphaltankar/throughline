@@ -83,8 +83,8 @@ an upstream artefact was not produced, it must be declared explicitly:
 ```yaml
 unsatisfied_inputs:
 - type: kpi-model
-  reason: No Skill currently produces kpi-model, so this recommendation has no
-    agreed baseline to be judged against.
+  reason: The KPI model was not available at execution time, so this
+    recommendation has no agreed baseline to be judged against.
 ```
 
 Declaring a type that the artefact does not actually require is also rejected,

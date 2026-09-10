@@ -61,16 +61,15 @@ The registry requires these headings verbatim: `## Executive recommendation`,
 `## Recommended solution`, `## Architecture`, `## Delivery plan`, `## Budget`,
 `## Operating model`, `## Human decisions required`.
 
-This artefact also requires `kpi-model` upstream. **No Skill currently produces
-it.** Until one does, declare it in `unsatisfied_inputs` with a reason. A
-recommendation with no agreed baseline or target measure cannot be judged, and
-saying so is part of the artefact.
+This artefact also requires `kpi-model` upstream. Resolve the accepted model
+before writing the recommendation; a recommendation with no agreed baseline or
+target measure cannot be judged.
 
 ## Scope honesty
 This Skill produces one artefact in a much larger plan. Run
 `python -m throughline.cli plan <intake>` to see the full artefact set the
-problem actually requires. Do not describe this artefact, or the six-step chain
-it belongs to, as a complete solution blueprint.
+problem actually requires. Do not describe this artefact, or the bound artefact
+slice it belongs to, as a complete solution blueprint.
 
 The gate checks structure only. Passing it does not make the recommendation
 correct, evidenced, approved, or production-ready.

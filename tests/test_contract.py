@@ -59,8 +59,9 @@ def test_prose_copies_document_no_extra_fields():
 
 
 def test_all_chain_skills_point_at_the_canonical_contract():
-    for name in ("problem-frame", "evidence-brief", "current-state-assessment",
-                 "requirements", "solution-options", "solution-recommendation"):
+    for name in ("assumption-register", "business-objectives", "current-state-assessment",
+                 "evidence-brief", "kpi-model", "open-questions", "problem-frame",
+                 "requirements", "solution-options", "solution-recommendation", "stakeholder-map"):
         text = (ROOT / ".claude/skills" / name / "SKILL.md").read_text(encoding="utf-8")
         assert "ontology/artefact-contract.yaml" in text, f"{name} does not cite the contract"
         assert "docs/artefact-contract.md" in text, f"{name} does not cite the contract doc"
@@ -95,8 +96,8 @@ def test_pp20_fixtures_use_the_canonical_contract():
             assert fm["review_required"] is True, f"{path.name} must require review"
 
 
-def test_fixture_dependency_deficits_are_declared_not_hidden():
-    """The six-step chain skips real upstream artefacts. That must be visible."""
+def test_fixture_dependencies_are_supplied_without_deferral():
+    """The expanded PP20 producer slice must not hide a required input."""
     registry = load_registry(ROOT)
     declared: dict[str, set[str]] = {}
     for path in sorted(FIXTURES.glob("*.md")):
@@ -108,5 +109,4 @@ def test_fixture_dependency_deficits_are_declared_not_hidden():
         if deferred:
             declared[fm["type"]] = deferred
 
-    assert declared["requirements"] == {"business-objectives", "stakeholder-map"}
-    assert declared["solution-recommendation"] == {"kpi-model"}
+    assert declared == {}

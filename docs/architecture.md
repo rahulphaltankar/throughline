@@ -12,8 +12,10 @@ intake -> archetypes -> seed manifest -> dependency closure -> topological order
 ```
 
 Everything up to and including `frontier` is implemented deterministically.
-`[skill execution]` **does not exist**: no code invokes a model, supplies it
-upstream artefacts, or writes an output file. Gates exist at Tier 0 only.
+The provider-independent execution layer in `scripts/pipeline.py` consumes that
+frontier, records work orders, invokes a selected adapter, and admits output
+only after Tier-0 validation. Its sole adapter today copies controlled fixtures;
+no code invokes a model. Gates exist at Tier 0 only.
 
 ### Artefact
 
@@ -23,6 +25,14 @@ dependency edges — archetype manifests and documentation must never restate
 them.
 
 There is no versioning, no content hashing and no staleness propagation.
+
+### Execution layer
+
+`scripts/run_pipeline.py` is a resumable runner outside the kernel boundary.
+It persists state under `runs/<run-id>/`, resolves accepted upstream output,
+calls a provider-neutral `ProducerAdapter`, then uses the real Tier-0 gate to
+mark each artefact accepted or rejected. It blocks visibly when an unbound
+dependency or an accepted-but-missing input prevents progress.
 
 ### Skill
 
@@ -66,10 +76,9 @@ listed in the roadmap, not built.
 v0.2 produces an **artefact plan**. It stops well before generation, let alone
 build or deploy.
 
-The gap between the plan and the Skills is the next implementation step: a
-runner that walks the frontier, invokes the bound Skill with resolved upstream
-artefacts, writes the output, and gates it. That runner must live in `scripts/`,
-outside the deterministic kernel boundary.
+The first runner now exists, but its only producer is intentionally synthetic.
+A real provider adapter must still render a Skill plus resolved input artefacts
+into output without changing the kernel boundary.
 
 A future adapter layer could delegate implementation to Claude Code, Codex,
 OpenHands, infrastructure tools or human task queues. None of that exists.

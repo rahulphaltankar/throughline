@@ -14,7 +14,7 @@ def skill_files():
 def test_all_skills_have_valid_frontmatter():
     """Previously only solution-blueprint was checked."""
     files = skill_files()
-    assert len(files) == 7
+    assert len(files) == 12
     for path in files:
         text = path.read_text(encoding="utf-8")
         assert text.startswith("---\n"), path

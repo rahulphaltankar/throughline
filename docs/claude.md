@@ -10,12 +10,17 @@ Claude Code discovers project Skills from that layout and addresses them by
 **directory name**. The `name:` in each SKILL.md frontmatter must match its
 directory; `tests/test_bindings.py` enforces this.
 
-Seven Skills exist:
+Twelve Skills exist:
 
 | Skill | Produces |
 |---|---|
 | `problem-frame` | `problem-frame` |
+| `assumption-register` | `assumption-register` |
+| `business-objectives` | `business-objectives` |
 | `evidence-brief` | `evidence-brief` |
+| `open-questions` | `open-questions` |
+| `stakeholder-map` | `stakeholder-map` |
+| `kpi-model` | `kpi-model` |
 | `current-state-assessment` | `current-state-assessment` |
 | `requirements` | `requirements` **and** `acceptance-criteria` |
 | `solution-options` | `solution-options` |
@@ -27,11 +32,12 @@ Seven Skills exist:
 ## What a Skill binding is
 
 The registry field `produced_by: skill:<dir>` records **which Skill knows how to
-write which artefact type**. It is a declaration, checked by tests. It is not a
-dispatch mechanism: no code reads a binding and invokes anything.
+write which artefact type**. It is checked by tests and consumed by the
+provider-independent runner when it creates a work order. The runner's local
+adapter copies fixtures only; it does not invoke a model.
 
-A human or an agent must read the Skill and do the work. Throughline neither
-calls a model nor writes an artefact.
+A real provider adapter will eventually interpret the Skill and do the work.
+Throughline currently neither calls a model nor generates content.
 
 ## Output contract
 
@@ -47,7 +53,7 @@ All Skills emit artefacts conforming to the single canonical contract:
 ## Claude.ai
 
 `scripts/package_skill.py` zips the `solution-blueprint` Skill for upload as a
-custom Skill. The six chain Skills have no packaging path today; they are
+custom Skill. The eleven chain Skills have no packaging path today; they are
 repository-native only.
 
 ## Trust boundary

@@ -15,7 +15,7 @@ The output reports:
 - the full artefact plan in dependency order;
 - the **frontier** — artefacts whose upstream inputs are all satisfied;
 - the **currently executable sequence** — the subset with a Skill binding;
-- the **dependency deficit** — registry-required upstream artefacts that no
+- any **dependency deficit** — registry-required upstream artefacts that no
   Skill can currently produce.
 
 ## How the sequence is derived
@@ -28,30 +28,25 @@ The output reports:
 4. `topological_order()` sorts the closed set.
 5. `compute_frontier()` returns what is genuinely ready now.
 6. `derive_mvp_sequence()` filters to artefacts with a `produced_by` binding and
-   records what those artefacts require but cannot get.
+   records any required upstream artefacts that cannot be produced.
 
 ## Current coverage
 
-Seven artefact types have a Skill binding: `problem-frame`, `evidence-brief`,
-`current-state-assessment`, `requirements`, `acceptance-criteria`,
-`solution-options`, `solution-recommendation`.
+Twelve artefact types have a Skill binding: `problem-frame`, `assumption-register`,
+`business-objectives`, `evidence-brief`, `open-questions`, `stakeholder-map`,
+`kpi-model`, `current-state-assessment`, `requirements`, `acceptance-criteria`,
+`solution-options`, and `solution-recommendation`.
 
-For PP20 the kernel plans **49 artefacts**. Seven have a producer. **The
+For PP20 the kernel plans **49 artefacts**. Twelve have a producer. **The
 executable sequence is an MVP slice, not the solution.**
 
-### Known dependency deficits
+### Current execution boundary
 
-The executable sequence cannot satisfy some of its own registry-required inputs:
-
-| Artefact | Missing upstream | Consequence |
-|---|---|---|
-| `requirements` | `business-objectives`, `stakeholder-map` | Objectives are inferred from the intake; requirement ownership is unattributed. |
-| `solution-recommendation` | `kpi-model` | No agreed baseline or target measure to judge the recommendation against. |
-
-These are not hidden. Each affected artefact must declare them in
-`unsatisfied_inputs` with a reason, the gate rejects the artefact if it does not,
-and the kernel reports them in `plan.json` under
-`mvp_unsatisfied_dependencies`.
+The expanded bound slice has no unsatisfied upstream dependency. The local
+runner accepts all 12 PP20 fixture-backed artefacts, then blocks at the next
+unbound frontier: `business-case`, `risk-register`, `target-architecture`, and
+`traceability`. A missing input must still be declared in `unsatisfied_inputs`
+when it occurs; the gate rejects silently dropped dependencies.
 
 ## Human freeze points
 

@@ -21,7 +21,7 @@ This packages `.claude/skills/solution-blueprint/` (including its `reference/`
 directory) as `dist/solution-blueprint-skill.zip` for upload through Claude's
 custom Skill interface.
 
-The six chain Skills are not packaged. They depend on repository paths
+The eleven chain Skills are not packaged. They depend on repository paths
 (`ontology/artefact-contract.yaml`, `docs/artefact-contract.md`) that do not
 exist outside a checkout.
 

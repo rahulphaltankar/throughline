@@ -10,12 +10,10 @@ inputs:
   type: evidence-brief
 - id: PP20-A03
   type: current-state-assessment
-unsatisfied_inputs:
-- type: business-objectives
-  reason: No Skill currently produces business-objectives. Objectives are inferred from the intake rather
-    than derived from an accepted artefact.
-- type: stakeholder-map
-  reason: No Skill currently produces stakeholder-map. Requirement ownership is therefore unattributed.
+- id: PP20-BO01
+  type: business-objectives
+- id: PP20-SM01
+  type: stakeholder-map
 status: proposed
 evidence:
 - claim: Requirements are derived from the current-state assessment and problem frame, not from confirmed

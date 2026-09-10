@@ -11,7 +11,7 @@
   acyclic graph — verified exhaustively by `scripts/validate_ontology.py`.
 - **Real dependency-ready frontier.** An artefact is on the frontier only when
   every artefact it requires is satisfied.
-- **Skill bindings.** `produced_by` in the registry; every binding resolves to a
+- **Skill bindings.** `produced_by` in the registry; 12 artefact bindings resolve to a
   real `.claude/skills/<dir>/SKILL.md`, enforced by tests.
 - **One canonical artefact output contract**, machine-readable in
   `ontology/artefact-contract.yaml`.
@@ -19,14 +19,14 @@
   rejects unknown artefact types, and enforces dependency coverage.
 - Deliberately-broken fixtures proving the gate rejects false positives.
 - Intake contract (as a dataclass), artefact plan as JSON + Markdown.
-- PP20 benchmark fixtures and pipeline.
+- PP20 benchmark fixtures, local execution runner, and pipeline.
 - Tests and CI, including the gate suite and ontology validation.
 
 ## Not implemented
 
-- **Artefact generation.** Nothing in this repository writes an artefact. There
-  is no runner between the plan and the Skills. This is the single largest gap.
-- **Producers for 51 of 58 artefact types.** Seven are bound to a Skill.
+- **Real artefact generation.** The provider-independent runner's only adapter
+  copies controlled fixtures; no model/provider adapter exists.
+- **Producers for 46 of 58 artefact types.** Twelve are bound to a Skill.
 - Gate tiers 1–4: structural predicates over content, adversarial review,
   calibrated rubric judgement, human validation.
 - Persistent ledger, artefact versioning, content-hash staleness propagation,

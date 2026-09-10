@@ -2,7 +2,7 @@
 
 ## What is checked today (automated)
 
-`scripts/run_pp20_pipeline.py` gates the seven hand-written PP20 fixtures for
+`scripts/run_pp20_pipeline.py` gates the twelve hand-written PP20 fixtures for
 structural conformance: canonical frontmatter, known artefact type, dependency
 coverage, evidence shape, human-review flags, registry-declared sections.
 

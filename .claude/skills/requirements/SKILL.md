@@ -42,9 +42,8 @@ The registry requires these headings verbatim:
 - `acceptance-criteria`: `## Business outcomes`, `## Freeze rule`
 
 `requirements` also requires `business-objectives` and `stakeholder-map`
-upstream. **No Skill currently produces either.** Until one does, declare them in
-`unsatisfied_inputs` with a reason — do not pretend the requirement set is
-properly sourced.
+upstream. Resolve both accepted artefacts before writing requirements; do not
+replace them with inferred objectives or unattributed ownership.
 
 The gate checks structure only. Passing it does not make the requirements right,
 and it does not freeze the acceptance criteria. Only an accountable human can.

@@ -64,7 +64,7 @@ def main() -> int:
     ungenerated = len(bp.artifacts) - len(bp.mvp_sequence)
     print(f"{ungenerated} of {len(bp.artifacts)} planned PP20 artefacts have no producer "
           f"and are not covered by these fixtures.")
-    print("The six-step chain is an MVP slice, not the PP20 solution.")
+    print("The bound artefact slice is an MVP slice, not the PP20 solution.")
     print()
 
     if failures:

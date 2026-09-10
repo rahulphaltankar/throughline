@@ -6,4 +6,5 @@ dist/
 build/
 *.egg-info/
 projects/*/blueprint/
+runs/
 .DS_Store

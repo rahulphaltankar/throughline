@@ -14,7 +14,9 @@ These files were authored by a human. They are **not** evidence that Throughline
 can produce artefacts — no code in this repository writes an artefact. Quoting
 them as system output would be a false claim.
 
-They cover 7 of the 49 artefacts the kernel plans for PP20.
+They cover 12 of the 49 artefacts the kernel plans for PP20. The local fixture
+adapter copies them only to exercise runner mechanics; they remain test data,
+not generated solution content.
 
 ## `broken/`
 

@@ -11,13 +11,16 @@
 - Tier-0 structural gate with false-positive fixtures
 - PP20 benchmark and CI
 
-## 1. Generation — NEXT, and the single largest gap
+## 1. Generation — in progress
 
-Nothing currently writes an artefact. Required:
+`scripts/run_pipeline.py` now provides the bounded, resumable execution path:
+frontier → work order → provider adapter → Tier-0 gate → persisted status. Its
+only adapter copies controlled fixtures; it does not generate content.
 
-- a runner in `scripts/` (never in `src/throughline/`) that walks the frontier,
-  invokes the bound Skill with resolved upstream artefacts, writes the output,
-  and gates it
+Still required:
+
+- a real provider adapter that renders a bound Skill using resolved upstream
+  artefacts, while preserving the runner's explicit request/result contract
 - generated-vs-fixture diffing as the first real eval
 - producers for the artefacts the chain already depends on and cannot get:
   `business-objectives`, `stakeholder-map`, `kpi-model`

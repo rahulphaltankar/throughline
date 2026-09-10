@@ -38,7 +38,7 @@ def pp20_fixture_paths():
 
 
 def test_pp20_fixtures_exist():
-    assert len(pp20_fixture_paths()) == 7
+    assert len(pp20_fixture_paths()) == 12
 
 
 @pytest.mark.parametrize("path", pp20_fixture_paths(), ids=lambda p: p.stem)

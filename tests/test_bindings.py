@@ -10,12 +10,17 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / ".claude" / "skills"
 
 CHAIN_SKILLS = [
+    "assumption-register",
+    "business-objectives",
     "problem-frame",
     "evidence-brief",
     "current-state-assessment",
+    "kpi-model",
+    "open-questions",
     "requirements",
     "solution-options",
     "solution-recommendation",
+    "stakeholder-map",
 ]
 
 
@@ -72,12 +77,17 @@ def test_bound_artefacts_are_exactly_the_expected_set():
     bound = sorted(aid for aid, spec in registry.items() if spec.produced_by)
     assert bound == sorted([
         "acceptance-criteria",
+        "assumption-register",
+        "business-objectives",
         "current-state-assessment",
         "evidence-brief",
+        "kpi-model",
+        "open-questions",
         "problem-frame",
         "requirements",
         "solution-options",
         "solution-recommendation",
+        "stakeholder-map",
     ])
 
 
@@ -109,7 +119,7 @@ def test_malformed_produced_by_is_rejected():
 
 def test_pp20_plan_reports_binding_coverage_honestly():
     bp = build_blueprint(ROOT, ROOT / "projects/pp20/problem.yaml")
-    assert len(bp.generatable) == 7
+    assert len(bp.generatable) == 12
     assert len(bp.generatable) + len(bp.ungeneratable) == len(bp.artifacts)
     assert len(bp.ungeneratable) > len(bp.generatable), (
         "most of the plan has no producer; the plan must not imply otherwise"
