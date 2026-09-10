@@ -1,259 +1,358 @@
 ---
 name: solution-blueprint
-description: Build a complete, decision-ready solution blueprint from a problem statement, pain point, opportunity, hypothesis, or transformation request. Use when the user asks how a solution should be defined, designed, architected, costed, planned, governed, deployed, operated, or handed over without executing production changes.
+description: Turn a problem statement, pain point, idea, hypothesis, requirement, opportunity, or transformation request into a complete, decision-ready solution blueprint covering solution definition, architecture, data, AI/GenAI, integrations, security, privacy, regulation, commercial case, delivery, PMO, deployment, operations, governance, risks, and next actions.
 ---
 
 # Solution Blueprint
 
-## Purpose
+## Role
 
-Turn an imperfect business or technical problem into a structured, traceable, first-pass solution blueprint.
+Act as a multidisciplinary solutioning team. Transform imperfect intent into a coherent, evidence-aware, decision-ready blueprint. This is a planning/design Skill, not a production execution Skill.
 
-Do **not** jump directly to technology choices. The work must establish the problem, evidence, requirements, solution options, architecture, data, AI applicability, security/privacy/regulatory considerations, commercial case, delivery plan, project-management model, deployment approach, operating model, change plan, and evidence needs.
+The user may provide a one-line idea, a dossier row, a detailed requirement, notes, or a mixture. Do not require a perfect brief before producing value.
 
-This Skill is a **solutioning Skill**, not an implementation/deployment Skill.
-
-## Operating rules
+## Non-negotiable rules
 
 1. Treat the input as an intake hypothesis, not truth.
-2. Preserve the user's source claims and label their evidential status.
-3. Never invent OEM-specific facts, system names, interfaces, costs, regulations, vendors, or constraints. Mark them `assumed` or `requires validation`.
-4. Start with the smallest useful problem frame.
-5. Identify the likely solution archetypes before generating detailed artefacts.
-6. Use dependency order rather than narrative phase order.
-7. Produce a coherent first draft even when information is incomplete; expose the missing information explicitly.
-8. Compare at least two plausible solution approaches before selecting a recommendation when the decision is material.
-9. For architecture, distinguish logical design from physical implementation choices.
-10. Assess whether AI/GenAI is actually justified; do not force AI into a conventional problem.
-11. Include delivery/project-management outputs: WBS, estimation basis, resource/skills plan, dependencies, schedule, critical-path assumptions, budget and RAID.
-12. Include deployment and BAU outputs even when the user only asked for “architecture”.
-13. Treat security, privacy, regulatory and governance as design inputs, not a final checklist.
-14. Separate facts, derived conclusions, assumptions, recommendations and open questions.
-15. Never represent an LLM judgement as legal/regulatory attestation.
+2. Preserve important source wording before interpreting it.
+3. Label material claims as `observed`, `cited`, `derived`, or `assumed`.
+4. Never silently convert an assumption into a fact.
+5. Never invent organisation-specific systems, interfaces, costs, regulations, vendors, contracts, data, constraints, or operational facts.
+6. Where information is missing, research it when necessary and possible; otherwise mark it as an assumption, open question, or validation activity.
+7. Compare AI/GenAI with credible non-AI alternatives. Do not force AI into a problem.
+8. Do not force every discipline or artefact into every solution. Select what the problem actually requires.
+9. Do not produce technology shopping lists. Explain role, alternatives, fit, trade-offs, complexity, skills, operating burden, lock-in, indicative cost, recommendation, and what evidence could change it.
+10. Do not give false precision. Use ranges, confidence, assumptions, dependencies, and basis of estimate.
+11. Never represent generated work as legal advice, regulatory attestation, security certification, production approval, or validated market demand.
+12. Do not fabricate citations.
+13. Expose material uncertainty rather than hiding it in polished prose.
+14. Human decisions remain human: priority, money, contracts, residual risk, regulated judgements, production-data access, irreversible actions, and final release/decommissioning.
 
-## Canonical workflow
+## Phase A — Understand
 
-Work through the artefact dependency graph in this order of intent:
+First determine:
+- problem / opportunity
+- trigger and affected actors
+- business/user impact
+- desired outcomes
+- domain and solution archetype(s)
+- scope and boundaries
+- constraints
+- stakeholders
+- current-state information
+- evidence quality
+- assumptions and unknowns
+- whether technology, data, AI, integration, organisational change, or PMO are material
 
-### 1. Frame
-Produce or refine:
-- Problem Frame
-- Evidence Brief
-- Stakeholder Map
-- Current-State Assessment
-- Business Objectives & Outcomes
-- KPI Model
-- Assumption Register
-- Open Questions
+Do this internally before committing to a solution architecture.
 
-### 2. Define
-Produce:
-- Requirements Catalogue
-- Acceptance Criteria
-- Traceability Matrix
+## Phase B — Evidence and framing
 
-Freeze acceptance criteria before making downstream recommendations.
+Establish:
+- source statement
+- problem frame
+- evidence brief
+- stakeholder view
+- current-state assessment
+- business objectives and outcomes
+- success measures / KPIs
+- assumption register
+- open questions
+- falsification questions for the central hypothesis
 
-### 3. Evaluate
-Produce:
-- Solution Option Set
-- Solution Recommendation
-- Decision Records as needed
+Research only what materially improves the decision. Prefer primary/official sources, authoritative technical documentation, reputable industry material, and then credible secondary material.
 
-Always explain why the recommendation wins and what could make it wrong.
+## Phase C — Requirements and acceptance
 
-### 4. Architect
-Select the required architecture artefacts:
-- Target-State Architecture
-- Logical Architecture
-- Physical / Deployment Architecture
-- Data Domain Model
-- Canonical Ontology
-- Data Products
-- Data Flow / Lineage
-- Integration Catalogue
-- API / Interface Contracts
-- AI Applicability Assessment
-- AI Architecture
-- AI Evaluation Plan
+Define, as applicable:
+- business requirements
+- functional requirements
+- non-functional requirements
+- data requirements
+- integration requirements
+- security/privacy requirements
+- AI requirements
+- operational requirements
+- reporting requirements
 
-Only include specialised artefacts when the problem warrants them.
+For material requirements, define acceptance conditions. Distinguish supplied requirements from inferred requirements.
 
-### 5. Trust / Assurance
-Assess:
-- Threat Model / Security Architecture
-- Privacy Assessment
-- Regulatory Applicability / Classification
-- Controls & Compliance Matrix
-- Risk Register
+Before downstream recommendations, freeze the current-draft acceptance criteria conceptually; do not move goalposts to suit a preferred design.
 
-For regulated decisions, prepare evidence and decision questions for the responsible human; do not attest on their behalf.
+## Phase D — Solution options
 
-### 6. Commercialise
-Produce:
-- Business Case
-- TCO / Cost Model
-- ROI / Benefits Model
-- Vendor / Technology Evaluation
-- Build / Buy / Partner Assessment
+Develop at least two credible alternatives when the decision is material.
 
-Technology recommendations must include rationale, trade-offs, lock-in, skills impact and indicative economics.
+Possible approaches include:
+- build
+- buy
+- configure
+- partner
+- automate
+- conventional software
+- AI/GenAI
+- hybrid
 
-### 7. Plan delivery
-Produce:
-- Delivery Strategy
-- WBS
-- Effort / Estimation Model
-- Resource / Skills Plan
-- Dependency Map
-- Delivery Schedule / Roadmap
-- Budget / Funding Plan
-- RAID Log
+Evaluate alternatives against the actual objectives and constraints. Make a recommendation and state:
+- why it wins
+- what assumptions drive the result
+- what would make another option preferable
+- reversibility / lock-in implications
 
-Use ranges and confidence levels instead of false precision.
+## Phase E — Architecture
 
-### 8. Assure and release-plan
-Produce:
-- Test Strategy
-- Test Plan / Test Suite
-- Migration / Cutover Plan where needed
-- Release Plan
-- Operational Readiness Assessment
+Select architecture depth based on problem complexity.
 
-### 9. Operate and transition
-Produce:
-- Service / Operating Model
-- Runbook
-- Observability Specification
-- Change Management Plan
-- Training / Adoption Plan where appropriate
-- Benefits Realisation Plan
-- Evidence Pack
-- Handover Pack
-- Continuous Improvement Plan
-- Retirement / Decommission Plan when relevant
+Where relevant produce:
+- context/system landscape
+- business/capability view
+- logical architecture
+- application/component architecture
+- data architecture
+- integration/API/event architecture
+- AI architecture
+- security architecture
+- physical/deployment architecture
 
-## Output format
+Use generic component names when specific systems are unknown. Do not invent OEM system names.
 
-Unless the user requests otherwise, deliver a professional solution blueprint with these sections:
+When architecture is material, include consistent Mermaid diagrams for:
+1. system/context architecture
+2. logical architecture
+3. important data flow
+4. deployment architecture where useful
+
+## Phase F — Data and AI
+
+### Data
+
+Where material, cover:
+- data domains
+- source systems
+- ownership
+- entities/identifiers
+- semantics / ontology
+- ingestion
+- transformation
+- storage
+- data products
+- metadata
+- lineage
+- quality
+- retention/access
+- consumers
+
+For complex data solutions, show:
+`source → ingestion → processing → semantic layer → data product/service → consumer`
+
+### AI/GenAI
+
+First answer:
+
+> Is AI/GenAI justified?
+
+If yes, cover only what is relevant:
+- use case
+- model role/class/provider options
+- RAG/knowledge sources
+- agents/tools/MCP
+- orchestration
+- guardrails
+- human oversight
+- evaluation
+- monitoring
+- versioning
+- data/security implications
+- AI-specific risks
+
+## Phase G — Trust, commercial and sourcing
+
+### Trust
+
+Assess applicability of:
+- threat model
+- trust boundaries
+- identity/access
+- secrets/encryption
+- logging/monitoring
+- vulnerability management
+- resilience
+- personal-data processing
+- minimisation/retention
+- regulatory regimes
+- AI governance
+- audit evidence
+
+### Commercial
+
+Where material, develop:
+- implementation cost
+- recurring run cost
+- licences/infrastructure
+- internal/external labour
+- migration/support
+- contingency
+- TCO
+- benefits logic
+- ROI/payback logic
+- value-realisation assumptions
+
+### Sourcing
+
+Where material, assess:
+- technology candidates
+- vendors
+- build/buy/partner
+- implementation partners
+- lock-in
+- skills and operating implications
+
+Keep technology, vendor, and implementation-partner choices distinct.
+
+## Phase H — Delivery and PMO
+
+Treat delivery planning as first-class solutioning.
+
+Produce, where relevant:
+- delivery strategy
+- workstreams
+- WBS: deliverables → workstreams → activities/tasks
+- effort ranges
+- duration ranges
+- confidence
+- basis of estimate
+- dependencies
+- resource/skills/FTE profile
+- internal/external split
+- milestones
+- critical path
+- schedule
+- budget/funding
+- RAID
+
+Do not create dates or costs merely to make the plan look complete.
+
+For estimates use low/base/high (or an equivalent range), confidence, assumptions, dependencies, and contingency.
+
+## Phase I — Assurance, deployment and operations
+
+Cover as applicable:
+- test strategy
+- test plan/suite
+- UAT
+- performance
+- security
+- privacy
+- accessibility
+- data-quality validation
+- AI evaluation
+- migration/cutover
+- release
+- rollback
+- environments
+- production-readiness conditions
+- operating model
+- support tiers
+- SLA/SLO
+- monitoring
+- logs/metrics/traces
+- incident/problem/change management
+- runbooks
+- resilience
+- backup/recovery
+- AI/model monitoring
+
+## Phase J — Change, governance and lifecycle
+
+Cover as applicable:
+- organisational impact
+- communications
+- training
+- adoption
+- role/process changes
+- governance
+- approval points
+- evidence/traceability
+- benefits realisation
+- continuous improvement
+- retirement/decommissioning
+
+For each material human decision, state:
+- decision required
+- options
+- recommendation
+- evidence
+- uncertainty
+- consequence
+- reversal cost
+
+## Evidence and citation discipline
+
+For material claims maintain a compact evidence register with:
+- claim
+- class: observed/cited/derived/assumed
+- source
+- confidence
+- what could change the claim
+
+If external research is performed, cite sources. Do not use a source merely to make an assertion look authoritative.
+
+## Output
+
+Unless the user requests another format, produce one integrated professional blueprint with these sections:
 
 1. Executive summary
-2. Problem and evidence
-3. Objectives and success measures
+2. Problem & evidence
+3. Objectives & success measures
 4. Scope / out of scope
-5. Assumptions / unknowns
-6. Stakeholders and operating context
+5. Stakeholders & operating context
+6. Assumptions, unknowns & evidence gaps
 7. Requirements
 8. Solution options
 9. Recommended solution
 10. Architecture overview
-11. Data architecture and flows
-12. AI/GenAI assessment and architecture where relevant
+11. Detailed logical architecture
+12. Data architecture & flows
 13. Integration architecture
-14. Security / privacy / regulatory
-15. Technology / tooling options
-16. Commercial case: TCO, ROI logic, pricing assumptions
-17. Delivery approach
-18. WBS
-19. Resource and skills plan
-20. Schedule and critical path
-21. Budget
-22. Risks / RAID
-23. Test and assurance approach
-24. Deployment / migration
-25. Operating model / support / SRE
-26. Change / training / adoption
-27. Governance and decision points
-28. Evidence and traceability
-29. Open questions requiring client input
-30. Recommended next actions
+14. AI/GenAI assessment & architecture
+15. Security / privacy / regulatory
+16. Technology / platform / vendor options
+17. Commercial case
+18. Delivery strategy
+19. Work breakdown structure
+20. Estimation & basis of estimate
+21. Resource / skills plan
+22. Dependency map
+23. Schedule & critical path
+24. Budget & TCO
+25. RAID / risks
+26. Test & assurance strategy
+27. Deployment / migration / cutover
+28. Operating model / support / SRE
+29. Change / training / adoption
+30. Governance & human decision points
+31. Evidence & traceability
+32. Open questions
+33. Recommended next actions
 
-## Artefact contract
+Adapt depth to the problem. Briefly mark genuinely non-applicable sections rather than forcing content.
 
-When you emit a typed artefact rather than a narrative document, conform to the
-canonical contract in `reference/artefact-output-contract.md`. There is exactly
-one contract; do not invent a variant. `scripts/gates/validate_artifact.py`
-enforces it and rejects unknown artefact types.
+## Internal quality check
 
-## Relationship to the kernel
+Before finalising, internally check:
+- problem → evidence → objective → requirement → option → recommendation is coherent;
+- architecture is consistent with the recommendation;
+- data flows match the architecture;
+- technology choices match requirements;
+- delivery plan matches the architecture;
+- resource/effort/schedule/budget logic is internally consistent;
+- deployment and operations are addressed;
+- material risks and unknowns are visible;
+- human decisions are explicit;
+- no invented facts or citations have slipped into the blueprint.
 
-The deterministic kernel decides *which* artefacts a problem needs and in what
-order. Run `python -m throughline.cli plan <intake>` to get that plan rather than
-inventing a workflow order here. Six artefact types currently have a Skill
-binding; the rest of the plan is manual work. Do not present a subset as a
-complete blueprint.
+The blueprint is `complete enough for review`, not `validated`, `approved`, `production-ready`, or `compliant`, unless those facts are independently established.
 
-## Evidence discipline
+## Canonical artefact contract
 
-Every material claim should be classified as:
-
-- `observed` — supplied directly or directly verified
-- `cited` — supported by an external source
-- `derived` — logically derived from accepted evidence
-- `assumed` — necessary working assumption, with a validation method
-
-Do not hide uncertainty in polished prose.
-
-## Human decision discipline
-
-Escalate rather than silently decide when the question concerns:
-- business priority;
-- legal/regulatory attestation;
-- residual-risk acceptance;
-- production-data access;
-- money/contracts/suppliers;
-- regulated decisions;
-- irreversible production actions;
-- decommissioning or retention obligations.
-
-Present the human with a concise decision request: decision, options, recommendation, evidence, uncertainty, consequence, and reversal cost.
-
-## Technology recommendation discipline
-
-Never output a “shopping list” of tools. For every material technology choice, state:
-
-- role in the architecture;
-- alternatives considered;
-- fit against requirements;
-- integration implications;
-- delivery complexity;
-- skills implications;
-- operating burden;
-- security/privacy implications;
-- vendor lock-in;
-- indicative cost category;
-- reason for recommendation;
-- what evidence would change the recommendation.
-
-## PMO estimation discipline
-
-Do not present AI-generated durations as facts. Use:
-
-- effort range;
-- calendar-duration range;
-- confidence;
-- assumptions;
-- dependencies;
-- resource profile;
-- critical path;
-- contingency;
-- basis of estimate.
-
-For budget, distinguish one-time implementation from recurring run costs.
-
-## Completion criterion
-
-The blueprint is “complete enough for review” when:
-
-- the problem and objective are explicit;
-- major unknowns are surfaced;
-- acceptance criteria exist and are frozen for the current draft;
-- at least one coherent solution is described;
-- architecture and data flow can be understood;
-- major risks and governance constraints are identified;
-- delivery, resource, schedule and budget logic exists;
-- deployment and operating model are addressed;
-- the human decisions required are explicit;
-- every material uncertainty is visible.
-
-Do not claim the solution is validated, approved, production-ready, or legally compliant merely because this Skill generated a blueprint.
+When emitting a typed artefact rather than the final narrative, conform to the canonical contract supplied with this Skill. Do not invent a frontmatter variant.
